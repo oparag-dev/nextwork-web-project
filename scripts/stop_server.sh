@@ -1,5 +1,9 @@
 #!/bin/bash
-sudo systemctl start tomcat.service
-sudo systemctl enable tomcat.service
-sudo systemctl start httpd.service
-sudo systemctl enable httpd.service
+isExistApp="$(pgrep httpd)"
+if [[ -n $isExistApp ]]; then
+sudo systemctl stop httpd.service
+fi
+isExistApp="$(pgrep tomcat)"
+if [[ -n $isExistApp ]]; then
+sudo systemctl stop tomcat.service
+fi
